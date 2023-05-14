@@ -50,8 +50,8 @@ def calculate_checksum(arguments: Union[int, str, bool, bytes, List[Union[int, s
         if isinstance(obj, (int, str, bool)):
             return str(obj)
 
-        if isinstance(obj, bytes):
-            return from_byte_array(obj)
+        if isinstance(obj, amf3.ByteArray):
+            from_byte_array(obj)
 
         if isinstance(obj, (date, datetime)):
             return str(obj.year) + str(obj.month - 1) + str(obj.day)
@@ -61,12 +61,17 @@ def calculate_checksum(arguments: Union[int, str, bool, bytes, List[Union[int, s
 
         return ""
 
-    def from_byte_array(byte_array):
-        if len(byte_array) <= 20:
-            return binascii.hexlify(byte_array).decode('utf-8')
+    def from_byte_array(bytes):
+        if len(bytes) <= 20:
+            return bytes.getvalue().hex()
 
-        bytes_to_check = [byte_array[int(len(byte_array) / 20 * i)] for i in range(20)]
-        return binascii.hexlify(bytes(bytes_to_check)).decode('utf-8')
+        num = len(bytes) // 20
+        array = bytearray(20)
+        for i in range(20):
+            bytes.seek(num * i)
+            array[i] = bytes.read(1)[0]
+
+        return array.hex()
 
     def from_array(arr):
         result = ""
