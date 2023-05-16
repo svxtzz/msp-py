@@ -10,7 +10,7 @@ import base64
 from typing import List, Union
 from datetime import date, datetime
 from urllib.parse import urlparse
-from pyamf import remoting, ASObject, TypedObject, AMF3
+from pyamf import remoting, ASObject, TypedObject, AMF3, amf3
 
 
 # Generator to retrieve a Marking ID for ticket headers
