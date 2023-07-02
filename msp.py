@@ -136,7 +136,7 @@ def invoke_method(server: str, method: str, params: list, session_id: str) -> tu
                    "image/jpeg, image/gif;q=0.8, application/x-shockwave-flash, "
                    "video/mp4;q=0.9, flv-application/octet-stream;q=0.8, "
                    "video/x-flv;q=0.7, audio/mp4, application/futuresplash, "
-                   "*/*;q=0.5, application/x-mpegURL"),
+                   "/;q=0.5, application/x-mpegURL"),
         "x-flash-version": "32,0,0,100",
         "Content-Length": str(len(encoded_req)),
         "Content-Type": "application/x-amf",
